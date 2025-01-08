@@ -1,9 +1,22 @@
 p1
-//skip
 
-pg2
-rdgfcg
-
-pg3
-gjytutgjhg
-kk
+class Human{
+    let name: String
+    let age: Int
+    let Equatable: Bool
+    init(name: String, age: Int, Equatable:Bool ) {
+    self.name = name
+    self.age = age
+        self.Equatable = Equatable
+}
+}
+var person = Human(name: "John", age: 25, Equatable:true)
+var person1 = Human(name: "Alex", age: 23, Equatable:true)
+if person.age == person1.age
+    && person.name == person1.name {
+    print(person.Equatable)
+} else
+{var person = Human(name: "John", age: 25, Equatable:false)
+    var person1 = Human(name: "Alex", age: 23, Equatable:false)
+    print(person.Equatable)
+}pg2
