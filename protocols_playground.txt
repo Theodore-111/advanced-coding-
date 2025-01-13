@@ -20,3 +20,104 @@ if person.age == person1.age
     var person1 = Human(name: "Alex", age: 23, Equatable:false)
     print(person.Equatable)
 }pg2
+class Exercise: CustomStringConvertible, Equatable, Comparable, Codable {
+    var distance: Double
+    var duration: Double
+    var id: Int
+    
+    init(distance: Double, duration: Double, id: Int) {
+        self.distance = distance
+        self.duration = duration
+        self.id = id
+    }
+    
+    var description: String {
+        return "Exercise(id: \(id), distance: \(distance), duration: \(duration))"
+    }
+    
+    static func == (lhs: Exercise, rhs: Exercise) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    static func < (lhs: Exercise, rhs: Exercise) -> Bool {
+        return lhs.id < rhs.id
+    }
+}
+
+let exercise1 = Exercise(distance: 4.5, duration: 28.0, id: 101)
+let exercise2 = Exercise(distance: 9.0, duration: 48.0, id: 102)
+let exercise3 = Exercise(distance: 6.5, duration: 34.0, id: 103)
+let exercise4 = Exercise(distance: 14.0, duration: 58.0, id: 104)
+let exercise5 = Exercise(distance: 19.0, duration: 85.0, id: 105)
+
+print(exercise1)
+print(exercise1 == exercise2)
+
+let exercises = [exercise4, exercise2, exercise5, exercise1, exercise3]
+let sortedExercises = exercises.sorted()
+print(sortedExercises)
+
+let jsonEncoder = JSONEncoder()
+jsonEncoder.outputFormatting = .prettyPrinted
+if let encodedData = try? jsonEncoder.encode(exercise1) {
+    let jsonString = String(data: encodedData, encoding: .utf8)!
+    print(jsonString)
+}
+
+pg3
+protocol Transport {
+    var wheels: Int { get }
+    func operate()
+}
+
+struct Automobile: Transport {
+    var wheels: Int {
+        return 4
+    }
+    
+    func operate() {
+        print("Driving the car!")
+    }
+}
+let automobile = Automobile()
+print("Automobile has \(automobile.wheels) wheels.")
+automobile.operate()
+
+struct Bicycle: Transport {
+    var wheels: Int {
+        return 2
+    }
+    
+    func operate() {
+        print("Start pedaling!")
+    }
+}
+let bicycle = Bicycle()
+print("Bicycle has \(bicycle.wheels) wheels.")
+bicycle.operate()
+
+pg4
+protocol PhysicalActivity {
+    var distance: Double { get set }
+    var duration: Double { get set }
+}
+
+struct JoggingActivity: PhysicalActivity {
+    var distance: Double
+    var duration: Double
+}
+
+struct DivingActivity: PhysicalActivity {
+    var distance: Double
+    var duration: Double
+}
+
+func workoutSummary(activity: PhysicalActivity) -> String {
+    return "This activity covered \(activity.distance) meters in \(activity.duration) minutes."
+}
+
+let joggingActivity = JoggingActivity(distance: 4800, duration: 29)
+let divingActivity = DivingActivity(distance: 950, duration: 23)
+
+print(workoutSummary(activity: joggingActivity))
+print(workoutSummary(activity: divingActivity))
